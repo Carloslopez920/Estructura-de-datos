@@ -1,0 +1,6 @@
+concluciones
+el programa es sencillo al momento de ejecutarse ya solo solo calcula el tiempo y los movimientos utilazados para resolver el problema de la torre de hanoin
+pero tuve varios problemas al momento de intentar que funcionara con los numeros grandes como 30 y 64 discos aunque en el programa se puede elegir la velocidad
+cuando el codigo se corria la computadora no soportaba las acciones y el programa se moria, asi que para solucionarlo le implemente un formato de texto ademas del grafico
+y aun asi el tiempo de ejecucion que se debe esperar para estos numeros altos son muy largos asi que les puse un mensaje de aproximadamente cuanto tiempo se tardaria
+para los numeros mas chicos el programa puede funcionar con el formato grafica y el tiempo tiempo en el que lo resuelve va creciendo exponencialmente dependiendo del numero de discos
