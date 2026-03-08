@@ -1,1 +1,59 @@
-init
+CLASE PILA (5 métodos)
+init(self, nombre): constructor principal que inicializa la pila con una lista vacía y asigna un nombre identificativo (Origen, Auxiliar o Destino)
+
+esta_vacia(self): verifica si la pila no contiene elementos y retorna True si está vacía o False en caso contrario
+
+push(self, item): agrega un elemento (disco) a la cima de la pila utilizando el método append de las listas
+
+pop(self): elimina y retorna el elemento de la cima de la pila, o retorna None si la pila está vacía
+
+peek(self): retorna el elemento de la cima sin eliminarlo, útil para validar movimientos antes de ejecutarlos
+
+CLASE TORREHANOGRAFICO (32 métodos)
+init(self): constructor principal que inicializa la ventana, variables de control como número de discos, velocidad, movimientos, estado de animación, pausa, calidad gráfica y modo ahorro, y luego llama a crear_interfaz_optimizada e inicializar_torres
+
+crear_interfaz_optimizada(self): diseña la interfaz gráfica optimizada para gama baja incluyendo canvas con doble buffer, botones grandes para acceso táctil, frame de controles compacto, área de texto con scroll, checkbutton para modo ahorro y etiquetas de información
+
+cambiar_calidad(self, event=None): ajusta el nivel de detalle gráfico entre baja, media o alta según la selección del usuario para mejorar el rendimiento en dispositivos limitados
+
+set_discos(self, num): establece el número de discos seleccionado, actualiza la variable correspondiente, auto-ajusta la calidad gráfica según la cantidad de discos (baja para más de 15, media para más de 8) y llama a inicializar_torres
+
+formatear_numero(self, num): convierte números grandes a formato legible con sufijos K, M o B para mostrar en etiquetas de información
+
+aplicar_discos(self): valida y aplica el número de discos ingresado manualmente en el spinbox verificando que esté entre 1 y 64
+
+inicializar_torres(self): limpia el canvas, dibuja la base y los postes de forma optimizada, reinicia las pilas origen, auxiliar y destino, coloca los discos en la torre de origen y decide qué tipo de dibujo usar según la cantidad de discos y calidad seleccionada
+
+dibujar_discos(self): versión optimizada que decide entre dibujo normal o simplificado según el modo ahorro activado y la cantidad de discos para maximizar rendimiento
+
+dibujar_discos_simplificado(self): versión de bajo rendimiento que dibuja discos como líneas horizontales en lugar de rectángulos rellenos para muchos discos
+
+dibujar_torre_discos(self, pila, x_centro, y_base): dibuja los discos de una torre específica con altura y ancho dinámicos según la calidad gráfica seleccionada y el número de disco
+
+dibujar_torre_lineas(self, pila, x, y_base): versión ultra-ligera que representa los discos como líneas horizontales para maximizar rendimiento cuando hay muchos discos
+
+dibujar_base_torres(self): dibuja la base y los postes de forma optimizada usando líneas en baja calidad o rectángulos en calidad normal
+
+actualizar_interfaz(self): actualiza el canvas y las etiquetas de información de forma eficiente usando update_idletasks en lugar de update para reducir consumo de recursos
+
+actualizar_texto(self): vuelca el buffer de texto al área de texto cuando alcanza el tamaño límite de 100 líneas para evitar actualizaciones constantes
+
+mover_disco(self, desde, hacia): versión optimizada que valida el movimiento verificando que el disco origen sea más pequeño que el disco destino, actualiza las pilas, incrementa el contador y actualiza la interfaz cada 5 movimientos en modo ahorro
+
+resolver_en_hilo(self): inicia la solución en un hilo separado para no bloquear la interfaz de usuario mientras se ejecutan los movimientos
+
+resolver_recursivo(self, n, origen, destino, auxiliar): implementación recursiva clásica del algoritmo de Hanoi con control de pausa y velocidad mediante time.sleep cuando la velocidad es mayor que cero
+
+iniciar_solucion(self): prepara el entorno decidiendo entre modo texto o visual según cantidad de discos, reinicia variables de estado, muestra la interfaz adecuada y lanza el hilo de resolución
+
+finalizar_solucion(self): detiene la animación, calcula el tiempo total, muestra mensaje con movimientos y tiempo, restaura los botones de control y actualiza el área de texto con el buffer pendiente
+
+pausar_animacion(self): alterna entre estado de pausa y continuación cambiando el texto del botón y gestionando la pausa del temporizador de tiempo transcurrido
+
+reiniciar_juego(self): detiene la animación, limpia el canvas, reinicia las pilas, restaura la vista visual y fuerza garbage collection para liberar memoria
+
+ejecutar(self): método principal que inicia el bucle de eventos de tkinter con mainloop para mantener la ventana activa
+
+actualizar_etiquetas(self): actualiza las etiquetas de información con los valores actuales de movimientos y tiempo y calcula el total de movimientos necesarios
+
+del(self): destructor implícito que libera recursos al cerrar la aplicación
