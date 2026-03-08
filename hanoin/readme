@@ -1,5 +1,5 @@
 CLASE PILA (5 métodos)
-init(self, nombre): constructor principal que inicializa la pila con una lista vacía y asigna un nombre identificativo (Origen, Auxiliar o Destino)
+init(self, nombre): constructor principal que inicializa la pila con una lista vacía y asigna un nombre identificativo
 
 esta_vacia(self): verifica si la pila no contiene elementos y retorna True si está vacía o False en caso contrario
 
@@ -12,7 +12,7 @@ peek(self): retorna el elemento de la cima sin eliminarlo, útil para validar mo
 CLASE TORREHANOGRAFICO (32 métodos)
 init(self): constructor principal que inicializa la ventana, variables de control como número de discos, velocidad, movimientos, estado de animación, pausa, calidad gráfica y modo ahorro, y luego llama a crear_interfaz_optimizada e inicializar_torres
 
-crear_interfaz_optimizada(self): diseña la interfaz gráfica optimizada para gama baja incluyendo canvas con doble buffer, botones grandes para acceso táctil, frame de controles compacto, área de texto con scroll, checkbutton para modo ahorro y etiquetas de información
+crear_interfaz_optimizada(self): diseña la interfaz gráfica optimizada para gama baja incluyendo canvas, botones grandes para acceso táctil, frame de controles compacto, área de texto con scroll, checkbutton para modo ahorro y etiquetas de información
 
 cambiar_calidad(self, event=None): ajusta el nivel de detalle gráfico entre baja, media o alta según la selección del usuario para mejorar el rendimiento en dispositivos limitados
 
