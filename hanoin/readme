@@ -56,4 +56,4 @@ ejecutar(self): método principal que inicia el bucle de eventos de tkinter con 
 
 actualizar_etiquetas(self): actualiza las etiquetas de información con los valores actuales de movimientos y tiempo y calcula el total de movimientos necesarios
 
-del(self): destructor implícito que libera recursos al cerrar la aplicación
+del(self): destructor implícito que libera recursos al cerrar la aplicación.
