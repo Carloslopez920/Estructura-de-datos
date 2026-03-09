@@ -188,7 +188,6 @@ class PilaVisual:
             if valor_especifico in self.pila:
                 if valor_especifico != self.pila[-1]:
                     # CASO ESPECIAL: Queremos eliminar un elemento que no es el tope
-                    # Ejemplo: Pila = [w, x, y, z] con z en el tope, queremos eliminar x
                     
                     # Encontrar la posición del elemento a eliminar
                     posicion = self.pila.index(valor_especifico)
@@ -495,11 +494,11 @@ class PilaVisual:
         self.root.after(5000, lambda: self.message_label.config(bg='#e8e8e8', text=""))
     
     def actualizar_visualizacion(self):
-        
+        """Actualiza la representación visual de la pila con el tope en la parte superior"""
         self.canvas.delete("all")
         
         if not self.pila:
-            
+            # Mostrar mensaje de pila vacía
             self.canvas.create_text(self.canvas.winfo_width()//2 or 200, 
                                    200, text="PILA VACÍA", 
                                    font=('Arial', 20, 'bold'), fill='#ccc')
@@ -507,66 +506,75 @@ class PilaVisual:
             self.stats_text.set(f"📊 Tamaño: 0 | Capacidad: {self.max_elementos} | Operaciones: {len(self.historial_operaciones)}")
             return
         
-       
+        # Obtener dimensiones del canvas
         canvas_width = self.canvas.winfo_width()
         canvas_height = self.canvas.winfo_height()
         
-        if canvas_width <= 1:  
+        if canvas_width <= 1:  # Si el canvas no tiene tamaño todavía
             canvas_width = 400
             canvas_height = 450
         
-       
-        y_inicial = canvas_height - 50  
+        # Configuración de dimensiones de los elementos
         alto_elemento = 40
         ancho_elemento = 180
         x_centro = canvas_width // 2
         
+        # Calcular la posición Y inicial para centrar verticalmente la pila
+        total_alto = len(self.pila) * alto_elemento
+        y_inicial = (canvas_height - total_alto) // 2
+        
+        # Dibujar cada elemento de la pila de ARRIBA a ABAJO
+        # El tope (último elemento agregado) va en la parte superior
         for i, valor in enumerate(reversed(self.pila)):
-            y_pos = y_inicial - (i * alto_elemento)
+            y_pos = y_inicial + (i * alto_elemento)
             color = self.colores[i % len(self.colores)]
             
-           
+            # Dibujar rectángulo del elemento
             self.canvas.create_rectangle(x_centro - ancho_elemento//2, 
-                                        y_pos - alto_elemento,
-                                        x_centro + ancho_elemento//2, 
                                         y_pos,
+                                        x_centro + ancho_elemento//2, 
+                                        y_pos + alto_elemento,
                                         fill=color, outline='#333', width=2)
             
-            
-            self.canvas.create_text(x_centro, y_pos - alto_elemento//2,
+            # Dibujar texto del valor
+            self.canvas.create_text(x_centro, y_pos + alto_elemento//2,
                                    text=str(valor), 
                                    font=('Arial', 12, 'bold'), 
                                    fill='black')
             
-           
+            # Indicador del tope (primer elemento, arriba)
             if i == 0:
-                self.canvas.create_text(x_centro + ancho_elemento//2 + 30, 
-                                       y_pos - alto_elemento//2,
-                                       text="← TOPE", 
+                self.canvas.create_text(x_centro - ancho_elemento//2 - 30, 
+                                       y_pos + alto_elemento//2,
+                                       text="TOPE →", 
                                        font=('Arial', 10, 'bold'), 
                                        fill='#f44336')
+            
+            # Indicador de la base (último elemento, abajo)
+            if i == len(self.pila) - 1:
+                self.canvas.create_text(x_centro - ancho_elemento//2 - 30, 
+                                       y_pos + alto_elemento//2,
+                                       text="BASE →", 
+                                       font=('Arial', 10, 'bold'), 
+                                       fill='#2196F3')
         
-        
+        # Dibujar línea superior (techo de la pila)
         self.canvas.create_line(x_centro - ancho_elemento//2 - 10, 
-                                y_inicial + 5,
+                                y_inicial - 5,
                                 x_centro + ancho_elemento//2 + 10, 
-                                y_inicial + 5,
+                                y_inicial - 5,
                                 fill='#333', width=3)
         
-        #
-        for i in range(len(self.pila)):
-            y_pos = y_inicial - (i * alto_elemento) - alto_elemento//2
-            pos_desde_tope = i
-            pos_desde_base = len(self.pila) - 1 - i
-            
-            self.canvas.create_text(x_centro - ancho_elemento//2 - 20, 
-                                   y_pos,
-                                   text=f"#{pos_desde_tope}", 
-                                   font=('Arial', 8), 
-                                   fill='#666')
+        # Dibujar línea inferior (base de la pila)
+        y_base = y_inicial + (len(self.pila) * alto_elemento)
+        self.canvas.create_line(x_centro - ancho_elemento//2 - 10, 
+                                y_base + 5,
+                                x_centro + ancho_elemento//2 + 10, 
+                                y_base + 5,
+                                fill='#333', width=3)
         
-        
-        self.estado_label.config(text=f"📊 Pila con {len(self.pila)} elementos - Tope: '{self.pila[-1]}'")
+        # Actualizar etiquetas de estado
+        self.estado_label.config(text=f"📊 Pila con {len(self.pila)} elementos - Tope: '{self.pila[-1]}' (arriba) - Base: '{self.pila[0]}' (abajo)")
         self.stats_text.set(f"📊 Tamaño: {len(self.pila)} | Capacidad: {self.max_elementos} | Operaciones: {len(self.historial_operaciones)}")
 
 
