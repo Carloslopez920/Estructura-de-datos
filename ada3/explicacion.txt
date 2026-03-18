@@ -1,0 +1,4 @@
+al momento de poner el subprograma el codigo contaba con validaciones asi que no se podian repetir los elementos en las listas, despues de quitar estas validaciones
+cuando se ejecuto sin las validaciones hiba por lista por lista asi que no dio error primero revisaba la de postres si habia un repetivo eliminaba el ultimo en ser agregado
+despues checaba las listas de ingredientes donde solo borraba un ingrediente si estaba repetido en esa lista, por ejemplo si dos postres diferentes tenian azucar
+y este estaba en listas separadas en plan y pastel por ejemplo este no se eliminaba pero si tenia azucar 2 veces en flan este si se eliminaba, no marco ningun error
